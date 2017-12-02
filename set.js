@@ -1,6 +1,6 @@
 (function (window) {
-    function Qset() {
-        this.arr=[];
+    function Qset(arr) {
+        this.arr=arr||[];
         this.index=0;
     }
     //add() 方法用来向一个Qset对象的末尾添加一个指定的值。
@@ -40,29 +40,37 @@
     Qset.prototype.entries=function () {
         this.Iterator.arr=this.arr;
         this.Iterator.index=this.index;
+        this.Iterator.n=2;
+        this.check=true;
         return this.Iterator;
     };
 
-
+    Qset.prototype.values=function () {
+        this.Iterator.arr=this.arr;
+        this.Iterator.index=this.index;
+        this.Iterator.n=1;
+        this.check=false;
+        return this.Iterator;
+    };
 
     Qset.prototype.forEach=function () {
         
-    };
-
-
-    Qset.prototype.values=function () {
-
     };
 
     Qset.prototype.Iterator={
         value:[],
         next:function () {
             let otherArr=[];
-            for (let i=0;i<2;i++){
+            for (let i=0;i<this.n;i++){
                 otherArr.push(this.arr[this.index]);
             }
             this.index++;
-            this.value=otherArr;
+            if(this.check==true){
+                this.value=otherArr;
+            }
+            else {
+                this.value=otherArr[0];
+            }
             return this;
         }
     };
