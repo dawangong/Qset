@@ -38,25 +38,31 @@
 
     //entries()
     Qset.prototype.entries=function () {
-        this.Iterator.arr=this.arr;
-        this.Iterator.index=this.index;
-        this.Iterator.n=2;
-        this.check=true;
+        this.fujia(2,true);
         return this.Iterator;
     };
 
     Qset.prototype.values=function () {
-        this.Iterator.arr=this.arr;
-        this.Iterator.index=this.index;
-        this.Iterator.n=1;
-        this.check=false;
+        this.fujia(1,false);
         return this.Iterator;
     };
 
-    Qset.prototype.forEach=function () {
-        
+    Qset.prototype.forEach=function (fn,arg) {
+        for (let i=0;i<this.arr.length;i++){
+            var v=this.arr[i];
+            var k=this.arr[i];
+            var a=this.arr;
+            fn(v,k,a);
+        }
     };
 
+    Qset.prototype.fujia=function (theIndex,blooean) {
+        this.Iterator.arr=this.arr;
+        this.Iterator.index=this.index;
+        this.Iterator.n=theIndex;
+        this.check=blooean;
+    };
+    
     Qset.prototype.Iterator={
         value:[],
         next:function () {
@@ -74,7 +80,6 @@
             return this;
         }
     };
-
 
     window.Qset=Qset;
 })(window);
