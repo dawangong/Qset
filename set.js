@@ -60,7 +60,7 @@
     Qset.prototype.entries = function () {
         let index = 0;
         return {
-            next: function () {
+            next: () => {
                 index++;
                 return {
                     value: this.arr.length > index ? [this.arr.length, this.arr.length] : undefined
@@ -72,7 +72,7 @@
     Qset.prototype.values = function () {
         let index = 0;
         return {
-            next: function () {
+            next: () => {
                 index++;
                 return {
                     value: this.arr.length > index ? this.arr.length : undefined
@@ -84,7 +84,7 @@
     Qset.prototype[Symbol.iterator] = function () {
         let index = 0;
         return {
-            next: function () {
+            next: () => {
                 index++;
                 return {
                     value: this.arr.length > index ? this.arr.length : undefined
