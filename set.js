@@ -1,30 +1,33 @@
 (function (window) {
-    function Qset() {
-        this.arr=[];
-            for (let i=0 ;i<arguments.length;i++){
-                if(arguments[0] instanceof Array){
-                    this.arr=arguments[0];
-                }
-               else {
-                    this.arr.push(arguments[i]);
-                }
+    function unique(arr) {
+        let tempArr = [];
+        arr.forEach(function (v) {
+            if (!tempArr.includes(v)) {
+                tempArr.push(v);
             }
-        this.index=0;
+        })
     }
+
+    function Qset(arr) {
+        this.arr = unique(arr) || [];
+        this.size = this.arr.length;
+    }
+
     //add() 方法用来向一个Qset对象的末尾添加一个指定的值。
-    Qset.prototype.add=function (num) {
+    Qset.prototype.add = function (num) {
         this.arr.push(num);
         return this;
     };
+
     //clear() 方法用来清空一个Qset对象中的所有元素。
-    Qset.prototype.clear=function () {
-        this.arr=[];
+    Qset.prototype.clear = function () {
+        this.arr = [];
     };
     //delete() 方法可以从一个Qset对象中删除指定的元素。
-    Qset.prototype.delete=function (num) {
-        let arrLength=this.arr.length;
-        this.arr.splice(num,1);
-        if(arrLength>this.arr.length){
+    Qset.prototype.delete = function (num) {
+        let arrLength = this.arr.length;
+        this.arr.splice(num, 1);
+        if (arrLength > this.arr.length) {
             return true;
         }
         else {
@@ -33,9 +36,9 @@
     };
 
     //has() 方法返回一个布尔值来指示对应的值value是否存在Qset对象中
-    Qset.prototype.has=function (str) {
-        for (let i=0;i<this.arr.length;i++){
-            if (this.arr[i]==str){
+    Qset.prototype.has = function (str) {
+        for (let i = 0; i < this.arr.length; i++) {
+            if (this.arr[i] == str) {
                 return true;
             }
             else {
@@ -44,45 +47,47 @@
         }
     };
 
+    Qset.prototype.forEach = function (fn, arg) {
+        this.arr.forEach(fn, arg);
+    };
+
     //entries()
-    Qset.prototype.entries=function () {
-        this.selectionExecution(2,true);
-        return this.Iterator;
-    };
-
-    Qset.prototype.values=function () {
-        this.selectionExecution(1,false);
-        return this.Iterator;
-    };
-
-    Qset.prototype.forEach=function (fn,arg) {
-        this.arr.forEach(fn,arg);
-    };
-
-    Qset.prototype.selectionExecution=function (theIndex,blooean) {
-        this.Iterator.arr=this.arr;
-        this.Iterator.index=this.index;
-        this.Iterator.n=theIndex;
-        this.Iterator.check=blooean;
-    };
-    
-    Qset.prototype.Iterator={
-        value:[],
-        next:function () {
-            let otherArr=[];
-            for (let i=0;i<this.n;i++){
-                otherArr.push(this.arr[this.index]);
+    Qset.prototype.entries = function () {
+        let index = 0;
+        return {
+            next: function () {
+                index++;
+                return {
+                    value: this.arr.length > index ? [this.arr.length, this.arr.length] : undefined
+                }
             }
-            this.index++;
-            if(this.check==true){
-                this.value=otherArr;
-            }
-            else {
-                this.value=otherArr[0];
-            }
-            return this;
         }
     };
 
-    window.Qset=Qset;
+    Qset.prototype.values = function () {
+        let index = 0;
+        return {
+            next: function () {
+                index++;
+                return {
+                    value: this.arr.length > index ? this.arr.length : undefined
+                }
+            }
+        }
+    };
+
+    Qset.prototype[Symbol.iterator] = function () {
+        let index = 0;
+        return {
+            next: function () {
+                index++;
+                return {
+                    value: this.arr.length > index ? this.arr.length : undefined
+                }
+            }
+        }
+
+    };
+
+    window.Qset = Qset;
 })(window);
