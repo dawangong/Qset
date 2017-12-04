@@ -10,7 +10,7 @@
     }
 
     function Qset(arr) {
-        if(!Array.isArray(arr)){
+        if (!Array.isArray(arr)) {
             throw new Error('参数只能是数组');
         }
         this.arr = unique(arr) || [];
@@ -45,11 +45,11 @@
 
     //has() 方法返回一个布尔值来指示对应的值value是否存在Qset对象中
     Qset.prototype.has = function (str) {
-       for (let i=0;i<this.arr.length;i++){
-           if(this.arr[i]==str){
-             return true;
-           }
-       }
+        for (let i = 0; i < this.arr.length; i++) {
+            if (this.arr[i] == str) {
+                return true;
+            }
+        }
     };
 
     Qset.prototype.forEach = function (fn, arg) {
