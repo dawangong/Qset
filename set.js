@@ -1,6 +1,14 @@
 (function (window) {
-    function Qset(arr) {
-        this.arr=arr||[];
+    function Qset() {
+        this.arr=[];
+            for (let i=0 ;i<arguments.length;i++){
+                if(arguments[0] instanceof Array){
+                    this.arr=arguments[0];
+                }
+               else {
+                    this.arr.push(arguments[i]);
+                }
+            }
         this.index=0;
     }
     //add() 方法用来向一个Qset对象的末尾添加一个指定的值。
