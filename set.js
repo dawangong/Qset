@@ -16,7 +16,7 @@
     Qset.prototype.delete=function (num) {
         let arrLength=this.arr.length;
         this.arr.splice(num,1);
-        if(arrLength<this.arr.length){
+        if(arrLength>this.arr.length){
             return true;
         }
         else {
@@ -38,29 +38,24 @@
 
     //entries()
     Qset.prototype.entries=function () {
-        this.fujia(2,true);
+        this.selectionExecution(2,true);
         return this.Iterator;
     };
 
     Qset.prototype.values=function () {
-        this.fujia(1,false);
+        this.selectionExecution(1,false);
         return this.Iterator;
     };
 
     Qset.prototype.forEach=function (fn,arg) {
-        for (let i=0;i<this.arr.length;i++){
-            var v=this.arr[i];
-            var k=this.arr[i];
-            var a=this.arr;
-            fn(v,k,a);
-        }
+        this.arr.forEach(fn,arg);
     };
 
-    Qset.prototype.fujia=function (theIndex,blooean) {
+    Qset.prototype.selectionExecution=function (theIndex,blooean) {
         this.Iterator.arr=this.arr;
         this.Iterator.index=this.index;
         this.Iterator.n=theIndex;
-        this.check=blooean;
+        this.Iterator.check=blooean;
     };
     
     Qset.prototype.Iterator={
