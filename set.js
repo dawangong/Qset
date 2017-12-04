@@ -10,10 +10,11 @@
     }
 
     function Qset(arr) {
-        if (!Array.isArray(arr)) {
+        if (arr&&!Array.isArray(arr)) {
             throw new Error('参数只能是数组');
         }
-        this.arr = unique(arr) || [];
+        this.arr = arr || [];
+        this.arr=unique(this.arr);
         this.size = this.arr.length;
     }
 
