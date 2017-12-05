@@ -26,3 +26,6 @@
 
 ### 遗留问题
 - has方法无法正常返回true or false
+
+### 后续
+- 换一种思路实现了has，但是为什么for循环内无法判断返回true or fasle 还存在问题
